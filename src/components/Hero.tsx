@@ -132,14 +132,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="animate-fade-in-up animate-delay-8 absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--text-muted)] text-[0.75rem] tracking-[2px] uppercase">
-        <div className="mouse">
-          <div className="mouse-wheel" />
-        </div>
-        <span>Scroll Down</span>
-      </div>
+      
     </section>
   );
 }
