@@ -113,13 +113,13 @@ export default function Hero() {
         {/* Stats */}
         <div className="animate-fade-in-up animate-delay-6 flex justify-center gap-16 max-sm:flex-col max-sm:gap-5">
           <div className="text-center">
-            <CountUp target={12} className="block text-[2.5rem] font-extrabold text-[var(--text-primary)] leading-none" />
+            <CountUp target={9} className="block text-[2.5rem] font-extrabold text-[var(--text-primary)] leading-none" />
             <span className="text-[0.85rem] text-[var(--text-muted)] uppercase tracking-[1px] mt-1">
               Projects
             </span>
           </div>
           <div className="text-center">
-            <CountUp target={5} className="block text-[2.5rem] font-extrabold text-[var(--text-primary)] leading-none" />
+            <CountUp target={8} className="block text-[2.5rem] font-extrabold text-[var(--text-primary)] leading-none" />
             <span className="text-[0.85rem] text-[var(--text-muted)] uppercase tracking-[1px] mt-1">
               Live Sites
             </span>

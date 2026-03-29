@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 
 interface Repo {
@@ -27,6 +28,27 @@ const langIcons: Record<string, string> = {
 
 const defaultIcon = "fas fa-code";
 
+// Custom live links for repos that don't have homepage set on GitHub
+const customHomepages: Record<string, string> = {
+  "job-finder": "https://jeanegroup.sisgensan.com/",
+  "barsMusic": "https://cholesterol-breathing-experimental-projected.trycloudflare.com",
+  "sis": "https://stratfordgensan.vercel.app/",
+};
+
+// Project screenshots (stored in public/projects/)
+const projectScreenshots: Record<string, string> = {
+  "barsMusic": "/projects/barsMusic.png",
+  "sis": "/projects/sis.png",
+  "Bigc": "/projects/Bigc.png",
+  "cheljor-foodstation": "/projects/cheljor-foodstation.png",
+  "job-finder": "/projects/job-finder.png",
+  "snilscents": "/projects/snilscents.png",
+  "socsargen": "/projects/socsargen.png",
+};
+
+// Repos to exclude from display (this portfolio itself)
+const excludeRepos = ["barsportfolio"];
+
 export default function Projects() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -36,7 +58,13 @@ export default function Projects() {
     fetch("https://api.github.com/users/devnetechn/repos?sort=updated&per_page=100")
       .then((res) => res.json())
       .then((data: Repo[]) => {
-        setRepos(data);
+        const processed = data
+          .filter((r: Repo) => !excludeRepos.includes(r.name))
+          .map((r: Repo) => ({
+            ...r,
+            homepage: r.homepage || customHomepages[r.name] || null,
+          }));
+        setRepos(processed);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -114,24 +142,34 @@ export default function Projects() {
         <div className="grid grid-cols-[repeat(auto-fill,minmax(340px,1fr))] gap-6 max-md:grid-cols-1">
           {filtered.map((repo, i) => (
             <ScrollReveal key={repo.id} delay={i * 60}>
-              <div className="project-card bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--radius-lg)] overflow-hidden transition-all duration-300 hover:border-[var(--border-hover)] hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
+              <div className="project-card group bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--radius-lg)] overflow-hidden transition-all duration-300 hover:border-[var(--border-hover)] hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
                 {/* Image Area */}
-                <div className="relative h-[180px] overflow-hidden">
-                  <div
-                    className="w-full h-full flex items-center justify-center text-5xl text-[var(--accent-light)]"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,206,201,0.1))",
-                    }}
-                  >
-                    <i
-                      className={
-                        repo.language
-                          ? langIcons[repo.language] || defaultIcon
-                          : defaultIcon
-                      }
+                <div className="relative h-[200px] overflow-hidden">
+                  {projectScreenshots[repo.name] ? (
+                    <Image
+                      src={projectScreenshots[repo.name]}
+                      alt={repo.name}
+                      width={680}
+                      height={400}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
-                  </div>
+                  ) : (
+                    <div
+                      className="w-full h-full flex items-center justify-center text-5xl text-[var(--accent-light)]"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,206,201,0.1))",
+                      }}
+                    >
+                      <i
+                        className={
+                          repo.language
+                            ? langIcons[repo.language] || defaultIcon
+                            : defaultIcon
+                        }
+                      />
+                    </div>
+                  )}
                   <div className="project-overlay">
                     <div className="flex gap-4">
                       {repo.homepage && (
