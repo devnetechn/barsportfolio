@@ -24,6 +24,7 @@ const langIcons: Record<string, string> = {
   SCSS: "fab fa-sass",
   Vue: "fab fa-vuejs",
   Python: "fab fa-python",
+  Blade: "fab fa-laravel",
 };
 
 const defaultIcon = "fas fa-code";
@@ -39,6 +40,9 @@ const customHomepages: Record<string, string> = {
 const projectScreenshots: Record<string, string> = {
   "barsMusic": "/projects/barsMusic.png",
   "sis": "/projects/sis.png",
+  "E-boto": "/projects/E-boto.png",
+  "Archive": "/projects/Archive.png",
+  "bhs": "/projects/bhs.png",
   "Bigc": "/projects/Bigc.png",
   "cheljor-foodstation": "/projects/cheljor-foodstation.png",
   "job-finder": "/projects/job-finder.png",

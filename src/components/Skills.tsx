@@ -21,6 +21,7 @@ const categories = [
     icon: "fas fa-server",
     color: "#68a063",
     skills: [
+      { icon: "fab fa-laravel", name: "Laravel", desc: "PHP web application framework" },
       { icon: "fab fa-python", name: "Django", desc: "High-level Python web framework" },
       { icon: "fab fa-php", name: "PHP", desc: "Server-side scripting language" },
       { icon: "fab fa-node-js", name: "Node.js", desc: "JavaScript runtime for server-side" },
