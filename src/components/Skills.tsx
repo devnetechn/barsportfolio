@@ -14,6 +14,7 @@ const categories = [
       { icon: "fab fa-html5", name: "HTML5", desc: "Semantic & accessible markup" },
       { icon: "fab fa-css3-alt", name: "CSS3", desc: "Styling & responsive layouts" },
       { icon: "fab fa-js-square", name: "JavaScript", desc: "Dynamic & interactive web apps" },
+      { icon: "fab fa-js-square", name: "TypeScript", desc: "Type-safe JavaScript development" },
     ],
   },
   {
