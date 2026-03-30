@@ -34,6 +34,7 @@ const customHomepages: Record<string, string> = {
   "job-finder": "https://jeanegroup.sisgensan.com/",
   "barsMusic": "https://cholesterol-breathing-experimental-projected.trycloudflare.com",
   "sis": "https://stratfordgensan.vercel.app/",
+  "NewsLetter": "https://isidro-hulom.vercel.app/#/",
 };
 
 // Project screenshots (stored in public/projects/)
@@ -43,6 +44,7 @@ const projectScreenshots: Record<string, string> = {
   "E-boto": "/projects/E-boto.png",
   "Archive": "/projects/Archive.png",
   "BarangayHealthCenter": "/projects/bhs.png",
+  "NewsLetter": "/projects/NewsLetter.png",
   "Bigc": "/projects/Bigc.png",
   "cheljor-foodstation": "/projects/cheljor-foodstation.png",
   "job-finder": "/projects/job-finder.png",
