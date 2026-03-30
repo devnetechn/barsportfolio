@@ -42,7 +42,7 @@ const projectScreenshots: Record<string, string> = {
   "sis": "/projects/sis.png",
   "E-boto": "/projects/E-boto.png",
   "Archive": "/projects/Archive.png",
-  "bhs": "/projects/bhs.png",
+  "BarangayHealthCenter": "/projects/bhs.png",
   "Bigc": "/projects/Bigc.png",
   "cheljor-foodstation": "/projects/cheljor-foodstation.png",
   "job-finder": "/projects/job-finder.png",
