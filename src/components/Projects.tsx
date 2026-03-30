@@ -24,7 +24,7 @@ const langIcons: Record<string, string> = {
   SCSS: "fab fa-sass",
   Vue: "fab fa-vuejs",
   Python: "fab fa-python",
-  Blade: "fab fa-laravel",
+  Laravel: "fab fa-laravel",
 };
 
 const defaultIcon = "fas fa-code";
@@ -67,6 +67,7 @@ export default function Projects() {
           .map((r: Repo) => ({
             ...r,
             homepage: r.homepage || customHomepages[r.name] || null,
+            language: r.language === "Blade" ? "Laravel" : r.language,
           }));
         setRepos(processed);
         setLoading(false);
