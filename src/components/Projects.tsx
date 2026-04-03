@@ -33,9 +33,9 @@ const defaultIcon = "fas fa-code";
 const customHomepages: Record<string, string> = {
   "job-finder": "https://jeanegroup.sisgensan.com/",
   "barsMusic": "https://gospel-outlets-vienna-circulation.trycloudflare.com",
-  "sis": "https://stratfordgensan.vercel.app/",
+  "sis": "https://stratfordgensan.vercel.app",
   "NewsLetter": "https://isidro-hulom.vercel.app/#/",
-  "socsargen": "https://sublime-istanbul-allan-connect.trycloudflare.com",
+  "socsargen-system": "https://sublime-istanbul-allan-connect.trycloudflare.com",
 };
 
 // Project screenshots (stored in public/projects/)
@@ -50,7 +50,7 @@ const projectScreenshots: Record<string, string> = {
   "cheljor-foodstation": "/projects/cheljor-foodstation.png",
   "job-finder": "/projects/job-finder.png",
   "snilscents": "/projects/snilscents.png",
-  "socsargen": "/projects/socsargen.png",
+  "socsargen-system": "/projects/socsargen.png",
 };
 
 // Repos to exclude from display (this portfolio itself)
@@ -69,7 +69,7 @@ export default function Projects() {
           .filter((r: Repo) => !excludeRepos.includes(r.name))
           .map((r: Repo) => ({
             ...r,
-            homepage: r.homepage || customHomepages[r.name] || null,
+            homepage: customHomepages[r.name] || r.homepage || null,
             language: r.language === "Blade" ? "Laravel" : r.language,
           }));
         setRepos(processed);
