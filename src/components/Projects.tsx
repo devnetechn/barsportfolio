@@ -32,9 +32,10 @@ const defaultIcon = "fas fa-code";
 // Custom live links for repos that don't have homepage set on GitHub
 const customHomepages: Record<string, string> = {
   "job-finder": "https://jeanegroup.sisgensan.com/",
-  "barsMusic": "https://cholesterol-breathing-experimental-projected.trycloudflare.com",
+  "barsMusic": "https://gospel-outlets-vienna-circulation.trycloudflare.com",
   "sis": "https://stratfordgensan.vercel.app/",
   "NewsLetter": "https://isidro-hulom.vercel.app/#/",
+  "socsargen": "https://sublime-istanbul-allan-connect.trycloudflare.com",
 };
 
 // Project screenshots (stored in public/projects/)
