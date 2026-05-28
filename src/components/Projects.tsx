@@ -35,7 +35,7 @@ const customHomepages: Record<string, string> = {
   "barsMusic": "https://gospel-outlets-vienna-circulation.trycloudflare.com",
   "sis": "https://stratfordgensan.vercel.app",
   "NewsLetter": "https://isidro-hulom.vercel.app/#/",
-  "socsargen-system": "https://sublime-istanbul-allan-connect.trycloudflare.com",
+  "socsargen-system": "https://dev.socsargencountyhospital.com",
 };
 
 // Project screenshots (stored in public/projects/)
