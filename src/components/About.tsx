@@ -29,7 +29,7 @@ export default function About() {
             {/* Image */}
             <div className="relative w-[300px] h-[300px] mx-auto">
               <Image
-                src="/bares.png"
+                src="/projects/bares.png"
                 alt="Bare'S"
                 width={300}
                 height={300}
