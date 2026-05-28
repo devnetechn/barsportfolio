@@ -29,7 +29,7 @@ export default function About() {
             {/* Image */}
             <div className="relative w-[300px] h-[300px] mx-auto">
               <Image
-                src="https://avatars.githubusercontent.com/u/255499279?v=4"
+                src="/bares.png"
                 alt="Bare'S"
                 width={300}
                 height={300}
