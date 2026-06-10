@@ -37,6 +37,7 @@ const customHomepages: Record<string, string> = {
   "NewsLetter": "https://isidro-hulom.vercel.app/#/",
   "socsargen-system": "https://dev.randyspaintdrywall.com/",
   "randy_project": "https://randyspaintdrywall.com/",
+  "ofw-socsargen": "https://ofw.socsargencountyhospital.com/",
 };
 
 // Project screenshots (stored in public/projects/)
@@ -53,6 +54,7 @@ const projectScreenshots: Record<string, string> = {
   "snilscents": "/projects/snilscents.png",
   "socsargen-system": "/projects/socsargen.png",
   "randy_project": "/projects/randy_project.png",
+  "ofw-socsargen": "/projects/ofw-socsargen.png",
 };
 
 // Repos to exclude from display (this portfolio itself + incomplete/test repos)
