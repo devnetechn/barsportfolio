@@ -55,6 +55,11 @@ export default function About() {
                 platforms and food ordering applications. I enjoy every step of
                 the development process.
               </p>
+              <p className="text-[var(--text-secondary)] mb-4">
+                I build and deploy websites on Vercel and set up API integrations
+                that connect different tools and services. I&apos;m a fast learner
+                who adapts quickly to new platforms and client needs.
+              </p>
 
               <div className="flex flex-wrap gap-6 my-8 max-md:justify-center">
                 <div className="flex items-center gap-2.5 text-[var(--text-secondary)] text-sm">
@@ -67,7 +72,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-2.5 text-[var(--text-secondary)] text-sm">
                   <i className="fas fa-rocket text-[var(--accent)]" />
-                  <span>5 Live Projects</span>
+                  <span>6 Live Projects</span>
                 </div>
               </div>
 

@@ -85,8 +85,9 @@ export default function Hero() {
 
         <p className="animate-fade-in-up animate-delay-4 text-[1.05rem] text-[var(--text-secondary)] max-w-[600px] mx-auto mb-10 leading-[1.8]">
           I build modern web applications with clean code and intuitive user
-          experiences. Passionate about turning ideas into functional, beautiful
-          digital products.
+          experiences — from responsive websites deployed on Vercel to API
+          integrations that connect your tools. I turn ideas into functional,
+          scalable digital products.
         </p>
 
         {/* CTA Buttons */}

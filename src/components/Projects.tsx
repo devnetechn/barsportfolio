@@ -36,6 +36,7 @@ const customHomepages: Record<string, string> = {
   "sis": "https://stratfordgensan.vercel.app",
   "NewsLetter": "https://isidro-hulom.vercel.app/#/",
   "socsargen-system": "https://dev.randyspaintdrywall.com/",
+  "randy_project": "https://randyspaintdrywall.com/",
 };
 
 // Project screenshots (stored in public/projects/)
@@ -51,10 +52,16 @@ const projectScreenshots: Record<string, string> = {
   "job-finder": "/projects/job-finder.png",
   "snilscents": "/projects/snilscents.png",
   "socsargen-system": "/projects/socsargen.png",
+  "randy_project": "/projects/randy_project.png",
 };
 
-// Repos to exclude from display (this portfolio itself)
-const excludeRepos = ["barsportfolio"];
+// Repos to exclude from display (this portfolio itself + incomplete/test repos)
+const excludeRepos = [
+  "barsportfolio",
+  "socsar",
+  "que",
+  "socsargen-system-1",
+];
 
 export default function Projects() {
   const [repos, setRepos] = useState<Repo[]>([]);
