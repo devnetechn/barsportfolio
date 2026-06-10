@@ -55,6 +55,7 @@ const projectScreenshots: Record<string, string> = {
   "socsargen-system": "/projects/socsargen.png",
   "randy_project": "/projects/randy_project.png",
   "ofw-socsargen": "/projects/ofw-socsargen.png",
+  "pharmacy": "/projects/pharmacy.png",
 };
 
 // Repos to exclude from display (this portfolio itself + incomplete/test repos)
