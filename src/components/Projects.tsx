@@ -31,6 +31,7 @@ const defaultIcon = "fas fa-code";
 
 // Custom live links for repos that don't have homepage set on GitHub
 const customHomepages: Record<string, string> = {
+  "web2print-clone": "https://web2print-clone-3pnr.vercel.app/"
   "job-finder": "https://jeanegroup.sisgensan.com/",
   "barsMusic": "https://gospel-outlets-vienna-circulation.trycloudflare.com",
   "sis": "https://stratfordgensan.vercel.app",
@@ -42,6 +43,7 @@ const customHomepages: Record<string, string> = {
 
 // Project screenshots (stored in public/projects/)
 const projectScreenshots: Record<string, string> = {
+  "web2print-clone": "/projects/clone.png",
   "barsMusic": "/projects/barsMusic.png",
   "sis": "/projects/sis.png",
   "E-boto": "/projects/E-boto.png",
