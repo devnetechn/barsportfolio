@@ -62,7 +62,7 @@ export default function Navbar() {
           style={{ fontFamily: "var(--font-mono)" }}
         >
           <span className="text-[var(--accent)]">&lt;</span>
-          Bare&apos;S
+          Everesto Cabasag
           <span className="text-[var(--accent)]"> /&gt;</span>
         </a>
 

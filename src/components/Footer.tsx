@@ -9,7 +9,7 @@ export default function Footer() {
             style={{ fontFamily: "var(--font-mono)" }}
           >
             <span className="text-[var(--accent)]">&lt;</span>
-            Bare&apos;S
+            Everesto Cabasag
             <span className="text-[var(--accent)]"> /&gt;</span>
           </a>
           <div className="flex gap-4">
@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="text-center text-[0.85rem] text-[var(--text-muted)]">
-          <p>&copy; 2026 Bare&apos;S. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Everesto Cabasag. All rights reserved.</p>
         </div>
       </div>
     </footer>

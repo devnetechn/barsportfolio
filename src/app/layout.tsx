@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import CursorGlow from "@/components/CursorGlow";
 import Footer from "@/components/Footer";
+import { siteUrl } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,9 +17,31 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bare'S | Portfolio",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Everesto Cabasag | Full-Stack Developer",
+    template: "%s | Everesto Cabasag",
+  },
   description:
-    "Full-Stack Developer portfolio — building modern web applications with clean code and intuitive user experiences.",
+    "Everesto Cabasag is a full-stack web developer in the Philippines who builds modern web applications, responsive websites, and API integrations.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_PH",
+    url: "/",
+    siteName: "Everesto Cabasag",
+    title: "Everesto Cabasag | Full-Stack Developer",
+    description:
+      "Explore the portfolio, web development projects, and services of Everesto Cabasag, a full-stack developer based in the Philippines.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Everesto Cabasag | Full-Stack Developer",
+    description:
+      "Full-stack web developer in the Philippines building modern websites, web applications, and API integrations.",
+  },
 };
 
 export default function RootLayout({

@@ -30,7 +30,7 @@ export default function About() {
             <div className="relative w-[300px] h-[300px] mx-auto">
               <Image
                 src="/projects/bares.png"
-                alt="Bare'S"
+                alt="Portrait of Everesto Cabasag, full-stack developer"
                 width={300}
                 height={300}
                 className="rounded-[var(--radius-lg)] object-cover relative z-[1] w-full h-full"
@@ -41,12 +41,12 @@ export default function About() {
             {/* Content */}
             <div>
               <h3 className="text-2xl font-bold tracking-[-0.5px] mb-5">
-                A passionate developer based in the Philippines
+                Everesto Cabasag — Full-Stack Developer in the Philippines
               </h3>
               <p className="text-[var(--text-secondary)] mb-4">
-                I&apos;m a full-stack web developer who loves building web
-                applications that solve real-world problems. With experience in
-                both frontend and backend technologies, I create seamless digital
+                I&apos;m Everesto Cabasag, a full-stack web developer who builds
+                web applications that solve real-world problems. With experience
+                in frontend and backend technologies, I create digital
                 experiences from concept to deployment.
               </p>
               <p className="text-[var(--text-secondary)] mb-4">

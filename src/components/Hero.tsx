@@ -76,7 +76,7 @@ export default function Hero() {
             Hello, I&apos;m
           </span>
           <span className="animate-fade-in-up animate-delay-2 block text-[clamp(2.5rem,7vw,5rem)] font-black tracking-[-2px] leading-[1.1] text-gradient mb-3">
-            Bare'S
+            Everesto Cabasag
           </span>
           <span className="animate-fade-in-up animate-delay-3 block text-[clamp(1.2rem,3vw,1.8rem)] font-semibold text-[var(--text-primary)]">
             Full-Stack Developer
