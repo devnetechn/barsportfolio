@@ -36,13 +36,16 @@ const customHomepages: Record<string, string> = {
   "barsMusic": "https://gospel-outlets-vienna-circulation.trycloudflare.com",
   "sis": "https://stratfordgensan.vercel.app",
   "NewsLetter": "https://isidro-hulom.vercel.app/#/",
+  "beed-review": "https://wonnalearn.site",
   "socsargen-system": "https://dev.randyspaintdrywall.com/",
-  "randy_project": "https://randyspaintdrywall.com/",
+  "randy_project": "https://midnightblue-rat-608891.hostingersite.com/",
   "ofw-socsargen": "https://ofw.socsargencountyhospital.com/",
 };
 
 // Project screenshots (stored in public/projects/)
 const projectScreenshots: Record<string, string> = {
+  "beed-review": "/projects/wonnalearn.png",
+  "gm-apartelle": "/projects/gm-apartelle.png",
   "web2print-clone": "/projects/clone.png",
   "barsMusic": "/projects/barsMusic.png",
   "sis": "/projects/sis.png",
@@ -58,6 +61,16 @@ const projectScreenshots: Record<string, string> = {
   "randy_project": "/projects/randy_project.png",
   "ofw-socsargen": "/projects/ofw-socsargen.png",
   "pharmacy": "/projects/pharmacy.png",
+};
+
+const projectTitles: Record<string, string> = {
+  "beed-review": "WonnaLearn",
+  "gm-apartelle": "GM Apartelle",
+};
+
+const projectDescriptions: Record<string, string> = {
+  "beed-review": "An online learning platform for studying and learning.",
+  "gm-apartelle": "A website for GM Apartelle in Maasim, Sarangani.",
 };
 
 // Repos to exclude from display (this portfolio itself + incomplete/test repos)
@@ -217,10 +230,12 @@ export default function Projects() {
                 {/* Info */}
                 <div className="p-6">
                   <h3 className="text-[1.15rem] font-bold mb-2 capitalize">
-                    {repo.name.replace(/-/g, " ")}
+                    {projectTitles[repo.name] || repo.name.replace(/-/g, " ")}
                   </h3>
                   <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed line-clamp-2">
-                    {repo.description || "A project built with passion and clean code."}
+                    {projectDescriptions[repo.name] ||
+                      repo.description ||
+                      "A project built with passion and clean code."}
                   </p>
                   <div className="flex gap-2 flex-wrap">
                     {repo.language && (
