@@ -44,6 +44,8 @@ const customHomepages: Record<string, string> = {
 
 // Project screenshots (stored in public/projects/)
 const projectScreenshots: Record<string, string> = {
+  "APEX": "/projects/apex.png",
+  "Alumni": "/projects/alumni.png",
   "beed-review": "/projects/wonnalearn.png",
   "gm-apartelle": "/projects/gm-apartelle.png",
   "web2print-clone": "/projects/clone.png",
@@ -69,8 +71,48 @@ const projectTitles: Record<string, string> = {
 };
 
 const projectDescriptions: Record<string, string> = {
-  "beed-review": "An online learning platform for studying and learning.",
-  "gm-apartelle": "A website for GM Apartelle in Maasim, Sarangani.",
+  "Alumni":
+    "The IHES Alumni Association website helps former students reconnect, share stories, and stay involved in their school community.",
+  "APEX":
+    "An online storefront for APEX, a General Santos City hat brand, showcasing its cap collections and latest releases.",
+  "Archive":
+    "A searchable capstone archive for exploring approved student projects by title, department, program, academic year, and semester.",
+  "BarangayHealthCenter":
+    "A digital health-center system for managing patient records, appointments with SMS reminders, immunizations, and health analytics.",
+  "BarangayInformation":
+    "A barangay management system for resident records, community announcements, and online requests for local certificates and documents.",
+  "barsMusic":
+    "A music library for discovering and playing trending songs, with tools for uploading and managing music.",
+  "beed-review":
+    "An online learning platform where students can sign in to continue studying and access learning materials.",
+  "Bigc":
+    "A BIG-C Foodhouse website showcasing its menu and local food offerings.",
+  "cheljor-foodstation":
+    "An online food-ordering storefront featuring Cheljor Foodstation's menu, food categories, and shopping cart.",
+  "E-boto":
+    "An election management dashboard for registering voters and candidates, monitoring votes, and viewing election results.",
+  "gm-apartelle":
+    "A booking website for GM Apartelle in Maasim, Sarangani, with room information and availability search.",
+  "Inventory-system":
+    "An inventory and sales management system for tracking products, categories, daily sales, users, and repair records.",
+  "NewsLetter":
+    "The IHES Journal publishes school articles, student accomplishments, events, announcements, and gallery updates.",
+  "ofw-socsargen":
+    "A clinic website for Overseas Filipino Workers in SOCCSKSARGEN, with medical services, packages, doctors, and appointment booking.",
+  "pharmacy":
+    "A pharmacy management application for maintaining medicine stock, recording transactions, and reviewing reports.",
+  "randy_project":
+    "A business website for Randy's Painting & Drywall Services, featuring home-improvement services, project photos, and estimate booking.",
+  "sis":
+    "The Stratford International School website presents its academics, admissions, school news, faculty, and student and parent portals.",
+  "snilscents":
+    "An online perfume storefront for S'NILS Scents, featuring handcrafted fragrances and a shop collection.",
+  "voting":
+    "The SIS E-BOTO 2025 portal provides voter sign-in for the school's online election.",
+  "web2print-clone":
+    "An online storefront for Web2Print Solutions, featuring custom apparel, printing products, and business services.",
+  "zhub":
+    "The Z Pickle Hub website lets customers browse court availability and book pickleball playing slots.",
 };
 
 // Repos to exclude from display (this portfolio itself + incomplete/test repos)
@@ -235,7 +277,7 @@ export default function Projects() {
                   <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed line-clamp-2">
                     {projectDescriptions[repo.name] ||
                       repo.description ||
-                      "A project built with passion and clean code."}
+                      "More details about this project will be added soon."}
                   </p>
                   <div className="flex gap-2 flex-wrap">
                     {repo.language && (
