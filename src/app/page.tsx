@@ -1,48 +1,50 @@
 import Hero from "@/components/Hero";
-import About from "@/components/About";
+import Projects from "@/components/Projects";
 import Services from "@/components/Services";
 import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
+import About from "@/components/About";
 import Contact from "@/components/Contact";
-import { siteUrl } from "@/lib/site";
+import { profile, siteUrl } from "@/lib/site";
+import { caseStudies } from "@/data/projects";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: siteUrl,
+  jobTitle: profile.role,
+  description: profile.description,
+  email: `mailto:${profile.email}`,
+  image: `${siteUrl}${profile.portrait}`,
+  address: { "@type": "PostalAddress", addressCountry: "PH" },
+  knowsAbout: [
+    "Full-stack web development",
+    "API integration",
+    "AI-assisted business automation",
+    "Backend and database development",
+    "Lead generation systems",
+  ],
+  sameAs: [profile.github],
+  subjectOf: caseStudies.map((c) => ({
+    "@type": "CreativeWork",
+    name: c.title,
+    url: `${siteUrl}/work/${c.slug}`,
+  })),
+};
 
 export default function Home() {
   return (
-    <main>
+    <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Everesto Cabasag",
-            url: siteUrl,
-            jobTitle: "Full-Stack Web Developer",
-            description:
-              "Full-stack web developer in the Philippines building modern web applications, responsive websites, and API integrations.",
-            email: "devnetechn@gmail.com",
-            image: `${siteUrl}/projects/bares.png`,
-            address: {
-              "@type": "PostalAddress",
-              addressCountry: "PH",
-            },
-            knowsAbout: [
-              "Full-stack web development",
-              "Frontend development",
-              "Backend development",
-              "Responsive web design",
-              "API integration",
-            ],
-            sameAs: ["https://github.com/devnetechn"],
-          }).replace(/</g, "\\u003c"),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
       <Hero />
-      <About />
+      <Projects />
       <Services />
       <Skills />
-      <Projects />
+      <About />
       <Contact />
-    </main>
+    </>
   );
 }

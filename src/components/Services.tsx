@@ -1,67 +1,105 @@
-"use client";
+import Link from "next/link";
 
-import ScrollReveal from "@/components/ScrollReveal";
+type Service = {
+  id: string;
+  title: string;
+  body: string;
+  includes: string[];
+  proof: { label: string; href: string }[];
+};
 
-const services = [
+const services: Service[] = [
   {
-    icon: "fas fa-laptop-code",
-    title: "Web Development",
-    desc: "Modern, responsive websites and web apps built with React, Next.js, and clean code — deployed fast on Vercel.",
-    features: ["Responsive design", "Vercel deployment", "Performance optimized"],
+    id: "full-stack",
+    title: "Full-stack web development",
+    body: "Complete web applications, from the public site customers see to the dashboard the team works in. Built with Next.js and React, or plain PHP when the hosting calls for it.",
+    includes: ["Marketing sites and storefronts", "Customer accounts and admin dashboards", "Responsive, accessible interfaces"],
+    proof: [
+      { label: "Web2Print", href: "/work/web2print" },
+      { label: "IHES Alumni", href: "/work/ihes-alumni-association" },
+    ],
   },
   {
-    icon: "fas fa-plug",
-    title: "API Integrations",
-    desc: "Connect your tools and platforms together. I set up API connections so your apps and services talk to each other seamlessly.",
-    features: ["Third-party APIs", "Webhooks & triggers", "Data sync"],
+    id: "integrations",
+    title: "API and third-party integrations",
+    body: "Connecting your system to the services it depends on: payments, suppliers, calendars, messaging, and CRMs, with failures handled so one outage doesn't take down the rest.",
+    includes: ["Stripe and PayMongo payments with webhooks", "Supplier APIs for catalog, pricing, and orders", "Twilio, Google Calendar, and CRM webhooks"],
+    proof: [
+      { label: "Web2Print", href: "/work/web2print" },
+      { label: "Randy's", href: "/work/randys-painting-drywall" },
+    ],
+  },
+  {
+    id: "ai-automation",
+    title: "AI-assisted business automation",
+    body: "AI that does a specific job inside your workflow, with clear limits. The model chooses from a fixed set of actions, its output is validated, and every decision is logged.",
+    includes: ["Lead follow-up agents with Claude", "Assistants that answer from your live data", "Fallbacks when the AI service is unavailable"],
+    proof: [
+      { label: "Randy's CRM agent", href: "/work/randys-painting-drywall" },
+      { label: "IHES assistant", href: "/work/ihes-alumni-association" },
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend and database development",
+    body: "REST APIs, schemas, and the rules that keep data correct and private, including multi-tenant isolation enforced in the database itself.",
+    includes: ["PostgreSQL and MySQL schema design", "Row Level Security and role-based access", "Automated API tests with Jest and Supertest"],
+    proof: [
+      { label: "IHES Alumni", href: "/work/ihes-alumni-association" },
+      { label: "PetCoverage Pulse", href: "/work/petcoverage-pulse" },
+    ],
+  },
+  {
+    id: "lead-gen",
+    title: "Lead generation and business systems",
+    body: "The parts of a website that bring in and track business: booking forms, lead stages, follow-up, ad attribution, local landing pages, and reports the owner can download.",
+    includes: ["Online booking and lead pipelines", "UTM and ad-click attribution", "Location pages and booking reports"],
+    proof: [{ label: "Randy's Painting & Drywall", href: "/work/randys-painting-drywall" }],
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="py-28">
-      <div className="max-w-[1200px] mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <span
-            className="text-[0.85rem] text-[var(--accent)] block mb-4"
-            style={{ fontFamily: "var(--font-mono)" }}
-          >
-            &lt;services&gt;
-          </span>
-          <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-1px] mb-4">
-            What I Offer
-          </h2>
-          <p className="text-[1.05rem] text-[var(--text-secondary)] max-w-[500px] mx-auto">
-            Services tailored to help businesses build and automate
-          </p>
-        </div>
+    <section id="services" className="section border-t border-rule" aria-labelledby="services-title">
+      <div className="container-page">
+        <h2 id="services-title" className="section-title">
+          What I can build for you
+        </h2>
+        <p className="section-intro">
+          Five kinds of work I take on, each backed by a project you can inspect.
+        </p>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
-          {services.map((service, i) => (
-            <ScrollReveal key={service.title} delay={i * 80}>
-              <div className="h-full bg-[var(--bg-card)] border border-[var(--border-color)] rounded-[var(--radius-lg)] p-8 transition-all duration-300 hover:bg-[var(--bg-card-hover)] hover:border-[var(--border-hover)] hover:-translate-y-1 group">
-                <div className="w-14 h-14 rounded-[var(--radius-md)] flex items-center justify-center mb-5 text-2xl text-[var(--accent)] bg-[rgba(108,92,231,0.1)] transition-all duration-300 group-hover:bg-[rgba(108,92,231,0.2)] group-hover:scale-110">
-                  <i className={service.icon} />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">
-                  {service.desc}
-                </p>
-                <ul className="flex flex-col gap-2.5">
-                  {service.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center gap-2.5 text-sm text-[var(--text-secondary)]"
-                    >
-                      <i className="fas fa-check text-[var(--accent)] text-xs" />
-                      <span>{feature}</span>
+        <div className="mt-14 border-t border-rule-strong">
+          {services.map((s) => (
+            <article
+              key={s.id}
+              id={s.id}
+              className="grid gap-5 border-b border-rule-strong py-10 md:grid-cols-[0.9fr_1.1fr] md:gap-12"
+            >
+              <h3 className="text-[clamp(1.4rem,2.4vw,1.85rem)]">{s.title}</h3>
+              <div>
+                <p className="prose-measure text-graphite">{s.body}</p>
+                <ul className="mt-5 grid gap-2">
+                  {s.includes.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span aria-hidden="true" className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
+                <p className="mt-6 text-[0.95rem] text-graphite">
+                  See it in{" "}
+                  {s.proof.map((p, i) => (
+                    <span key={p.href + p.label}>
+                      {i > 0 && " and "}
+                      <Link href={p.href} className="text-link">
+                        {p.label}
+                      </Link>
+                    </span>
+                  ))}
+                </p>
               </div>
-            </ScrollReveal>
+            </article>
           ))}
         </div>
       </div>

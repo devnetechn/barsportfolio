@@ -1,96 +1,61 @@
-"use client";
-
-import ScrollReveal from "@/components/ScrollReveal";
 import Image from "next/image";
+import Link from "next/link";
+import { profile } from "@/lib/site";
 
 export default function About() {
   return (
-    <section id="about" className="py-28 relative">
-      <div className="max-w-[1200px] mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <span
-            className="text-[0.85rem] text-[var(--accent)] block mb-4"
-            style={{ fontFamily: "var(--font-mono)" }}
-          >
-            &lt;about&gt;
-          </span>
-          <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-1px] mb-4">
-            About Me
-          </h2>
-          <p className="text-[1.05rem] text-[var(--text-secondary)] max-w-[500px] mx-auto">
-            Get to know the developer behind the code
-          </p>
+    <section id="about" className="section border-t border-rule" aria-labelledby="about-title">
+      <div className="container-page grid gap-12 md:grid-cols-[280px_1fr] md:gap-16 lg:grid-cols-[320px_1fr]">
+        <div>
+          <Image
+            src={profile.portrait}
+            alt={`Portrait of ${profile.name}`}
+            width={640}
+            height={640}
+            sizes="(min-width: 1024px) 320px, (min-width: 768px) 280px, 240px"
+            className="aspect-square w-60 rounded-[var(--radius-lg)] object-cover md:w-full"
+          />
         </div>
-
-        {/* Grid */}
-        <ScrollReveal>
-          <div className="grid md:grid-cols-[350px_1fr] gap-20 items-center max-md:grid-cols-1 max-md:gap-12 max-md:text-center">
-            {/* Image */}
-            <div className="relative w-[300px] h-[300px] mx-auto">
-              <Image
-                src="/projects/bares.png"
-                alt="Portrait of Everesto Cabasag, full-stack developer"
-                width={300}
-                height={300}
-                className="rounded-[var(--radius-lg)] object-cover relative z-[1] w-full h-full"
-              />
-              <div className="absolute -inset-2 rounded-[calc(var(--radius-lg)+4px)] border-2 border-[var(--accent)] opacity-30" />
-            </div>
-
-            {/* Content */}
-            <div>
-              <h3 className="text-2xl font-bold tracking-[-0.5px] mb-5">
-                Everesto Cabasag — Full-Stack Developer in the Philippines
-              </h3>
-              <p className="text-[var(--text-secondary)] mb-4">
-                I&apos;m Everesto Cabasag, a full-stack web developer who builds
-                web applications that solve real-world problems. With experience
-                in frontend and backend technologies, I create digital
-                experiences from concept to deployment.
-              </p>
-              <p className="text-[var(--text-secondary)] mb-4">
-                My journey in web development has led me to work on diverse
-                projects — from student information systems to e-commerce
-                platforms and food ordering applications. I enjoy every step of
-                the development process.
-              </p>
-              <p className="text-[var(--text-secondary)] mb-4">
-                I build and deploy websites on Vercel and set up API integrations
-                that connect different tools and services. I&apos;m a fast learner
-                who adapts quickly to new platforms and client needs.
-              </p>
-
-              <div className="flex flex-wrap gap-6 my-8 max-md:justify-center">
-                <div className="flex items-center gap-2.5 text-[var(--text-secondary)] text-sm">
-                  <i className="fas fa-map-marker-alt text-[var(--accent)]" />
-                  <span>Philippines</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-[var(--text-secondary)] text-sm">
-                  <i className="fas fa-code text-[var(--accent)]" />
-                  <span>Full-Stack Developer</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-[var(--text-secondary)] text-sm">
-                  <i className="fas fa-rocket text-[var(--accent)]" />
-                  <span>6 Live Projects</span>
-                </div>
-              </div>
-
+        <div>
+          <h2 id="about-title" className="section-title">
+            About me
+          </h2>
+          <div className="prose-measure mt-6 space-y-5 text-lg text-graphite">
+            <p>
+              I&apos;m {profile.name}, a full stack developer in the {profile.location}. Most of my work
+              is for small businesses and organizations that need their website to do more than look
+              good: take bookings, collect payments, sync with suppliers, and keep leads from going
+              cold.
+            </p>
+            <p>
+              I work across both JavaScript and PHP stacks and pick based on where the project will
+              run. Web2Print and Pulse are Next.js on Vercel. Randy&apos;s runs on plain PHP and MySQL
+              because it lives on shared hosting.
+            </p>
+            <p>
+              Before building a larger feature I write a short design note covering the goal, the
+              approach, and what I decided not to build. You can read them in the{" "}
               <a
-                href="https://github.com/devnetechn"
+                href="https://github.com/devnetechn/randy_project/tree/main/docs/superpowers/specs"
                 target="_blank"
-                className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-[var(--radius-xl)] text-[0.95rem] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_var(--accent-glow)]"
-                style={{
-                  background: "var(--gradient-1)",
-                  boxShadow: "0 4px 20px var(--accent-glow)",
-                }}
+                rel="noopener noreferrer"
+                className="text-link"
               >
-                <i className="fab fa-github" />
-                <span>View GitHub</span>
+                Randy&apos;s repository
               </a>
-            </div>
+              . I use AI coding tools in my workflow, and I stay accountable for every decision they
+              touch.
+            </p>
           </div>
-        </ScrollReveal>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/resume" className="btn btn-primary">
+              View resume
+            </Link>
+            <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+              GitHub profile
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

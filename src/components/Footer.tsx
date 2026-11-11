@@ -1,30 +1,30 @@
+import Link from "next/link";
+import { profile } from "@/lib/site";
+
 export default function Footer() {
   return (
-    <footer className="py-10 border-t border-[var(--border-color)]">
-      <div className="max-w-[1200px] mx-auto px-6">
-        <div className="flex justify-between items-center mb-6">
-          <a
-            href="#hero"
-            className="text-lg font-bold"
-            style={{ fontFamily: "var(--font-mono)" }}
-          >
-            <span className="text-[var(--accent)]">&lt;</span>
-            Everesto Cabasag
-            <span className="text-[var(--accent)]"> /&gt;</span>
-          </a>
-          <div className="flex gap-4">
-            <a
-              href="https://github.com/devnetechn"
-              target="_blank"
-              className="w-10 h-10 rounded-full bg-[var(--bg-card)] border border-[var(--border-color)] flex items-center justify-center text-lg text-[var(--text-secondary)] transition-all duration-300 hover:bg-[var(--accent)] hover:border-[var(--accent)] hover:text-white"
-            >
-              <i className="fab fa-github" />
+    <footer className="no-print border-t border-rule">
+      <div className="container-page flex flex-col gap-6 py-10 text-[0.95rem] text-graphite md:flex-row md:items-center md:justify-between">
+        <p>
+          &copy; {new Date().getFullYear()} {profile.name}. {profile.location}.
+        </p>
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          <li>
+            <a className="hover:text-ink" href={`mailto:${profile.email}`}>
+              Email
             </a>
-          </div>
-        </div>
-        <div className="text-center text-[0.85rem] text-[var(--text-muted)]">
-          <p>&copy; {new Date().getFullYear()} Everesto Cabasag. All rights reserved.</p>
-        </div>
+          </li>
+          <li>
+            <a className="hover:text-ink" href={profile.github} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <Link className="hover:text-ink" href="/resume">
+              Resume
+            </Link>
+          </li>
+        </ul>
       </div>
     </footer>
   );
