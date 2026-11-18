@@ -1,23 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Public_Sans } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { profile, siteUrl } from "@/lib/site";
 
-const bricolage = Bricolage_Grotesque({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-bricolage",
+  axes: ["wdth"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  variable: "--font-public-sans",
-  display: "swap",
-});
-
-const title = `${profile.name} | ${profile.headline}`;
+const title = `${profile.name}, Full-Stack Developer`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -26,15 +21,18 @@ export const metadata: Metadata = {
     template: `%s | ${profile.name}`,
   },
   description: profile.description,
+  applicationName: profile.name,
   authors: [{ name: profile.name, url: siteUrl }],
   creator: profile.name,
   keywords: [
-    "Full Stack Developer",
-    "AI integration",
-    "business automation",
-    "API integration",
+    "Full-Stack Developer",
     "Next.js developer",
+    "React developer",
     "PHP developer",
+    "API integration",
+    "AI integration",
+    "AI automation",
+    "freelance web developer",
     "Philippines",
   ],
   alternates: { canonical: "/" },
@@ -45,38 +43,23 @@ export const metadata: Metadata = {
     siteName: profile.name,
     title,
     description: profile.description,
-    images: [
-      {
-        url: "/work/randy-php-home.jpg",
-        width: 1440,
-        height: 900,
-        alt: "Randy's Painting & Drywall, a project by Everesto Cabasag",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description: profile.description,
-    images: ["/work/randy-php-home.jpg"],
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f1622" },
-  ],
+  themeColor: "#141517",
+  colorScheme: "dark",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${publicSans.variable}`}>
+    <html lang="en" className={archivo.variable}>
       <body>
         <a href="#main" className="skip-link">
           Skip to content

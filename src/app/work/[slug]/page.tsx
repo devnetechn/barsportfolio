@@ -2,224 +2,241 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { caseStudies, getCaseStudy } from "@/data/projects";
+import { getProject, projects } from "@/data/projects";
 import { profile, siteUrl } from "@/lib/site";
+import { StatusTag } from "@/components/ProjectCard";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "@/components/icons";
 
 type Props = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return caseStudies.map((c) => ({ slug: c.slug }));
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const c = getCaseStudy(slug);
-  if (!c) return {};
-  const title = `${c.title} case study`;
+  const p = getProject(slug);
+  if (!p) return {};
+  const title = `${p.title} case study`;
   return {
     title,
-    description: c.oneLiner,
-    alternates: { canonical: `/work/${c.slug}` },
+    description: p.oneLiner,
+    alternates: { canonical: `/work/${p.slug}` },
     openGraph: {
       type: "article",
-      url: `/work/${c.slug}`,
+      url: `/work/${p.slug}`,
       title: `${title} | ${profile.name}`,
-      description: c.oneLiner,
-      images: [{ url: c.cover.src, width: 1440, height: 900, alt: c.cover.alt }],
+      description: p.oneLiner,
+      images: [{ url: p.cover.src, alt: p.cover.alt }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} | ${profile.name}`,
-      description: c.oneLiner,
-      images: [c.cover.src],
+      description: p.oneLiner,
+      images: [p.cover.src],
     },
   };
 }
 
 function Block({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <section aria-labelledby={id} className="border-t border-rule pt-10">
-      <h2 id={id} className="text-[clamp(1.5rem,2.6vw,2rem)]">
+    <section aria-labelledby={id} className="grid gap-6 border-t border-line pt-10 md:grid-cols-[220px_minmax(0,1fr)] md:gap-12">
+      <h2 id={id} className="text-[0.95rem] font-semibold text-ink-2">
         {title}
       </h2>
-      <div className="mt-5">{children}</div>
+      <div className="min-w-0">{children}</div>
     </section>
   );
 }
 
+const external = { target: "_blank", rel: "noopener noreferrer" } as const;
+
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
-  const c = getCaseStudy(slug);
-  if (!c) notFound();
+  const p = getProject(slug);
+  if (!p) notFound();
 
-  const index = caseStudies.findIndex((x) => x.slug === c.slug);
-  const next = caseStudies[(index + 1) % caseStudies.length];
+  const index = projects.findIndex((x) => x.slug === p.slug);
+  const next = projects[(index + 1) % projects.length];
+  const gallery = p.shots.filter((s) => s.src !== p.cover.src);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    name: c.title,
-    description: c.oneLiner,
-    url: `${siteUrl}/work/${c.slug}`,
-    image: `${siteUrl}${c.cover.src}`,
+    name: p.title,
+    description: p.oneLiner,
+    url: `${siteUrl}/work/${p.slug}`,
+    image: `${siteUrl}${p.cover.src}`,
     author: { "@type": "Person", name: profile.name, url: siteUrl },
-    keywords: [...c.stack, ...c.integrations.map((i) => i.name)].join(", "),
+    keywords: [...p.stack, ...p.integrations.map((i) => i.name)].join(", "),
   };
 
   return (
-    <article className="pt-28 md:pt-32">
+    <article className="pt-[110px] md:pt-[140px]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
+
       <header className="container-page">
-        <nav aria-label="Breadcrumb">
-          <Link href="/#work" className="text-link text-[0.95rem]">
+        <nav aria-label="Breadcrumb" className="fade-in">
+          <Link href="/#work" className="link inline-flex items-center gap-2 text-[0.95rem] text-ink-2">
+            <ArrowLeft />
             All work
           </Link>
         </nav>
-        <p className="mt-10 text-[0.975rem] font-medium text-accent">{c.engagement}</p>
-        <h1 className="mt-3 max-w-[18ch] text-[clamp(2.4rem,6vw,4.2rem)] leading-[1.02] tracking-[-0.035em]">
-          {c.title}
+
+        <div className="fade-in mt-10 flex flex-wrap items-center gap-x-3 gap-y-2" style={{ "--d": "80ms" } as React.CSSProperties}>
+          <StatusTag status={p.status} />
+          <span className="text-[0.95rem] text-ink-2">{p.engagement}</span>
+        </div>
+
+        <h1 className="display mt-6 max-w-[16ch] text-[clamp(2.4rem,7vw,6rem)]">
+          <span className="rise">
+            <span>{p.title}</span>
+          </span>
         </h1>
-        <p className="mt-6 max-w-[60ch] text-xl text-graphite">{c.oneLiner}</p>
-        <ul className="mt-8 flex flex-wrap gap-3">
-          {c.links.map((l, i) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`}
-              >
-                {l.label}
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </header>
 
-      <div className="container-page mt-12 md:mt-16">
-        <Image
-          src={c.cover.src}
-          alt={c.cover.alt}
-          width={1440}
-          height={900}
-          priority
-          sizes="(min-width: 1120px) 1056px, 100vw"
-          className="w-full rounded-[var(--radius-lg)] border border-rule shadow-[var(--shadow)]"
-        />
-      </div>
-
-      <div className="container-page mt-16 grid gap-12 pb-24 lg:grid-cols-[1fr_300px] lg:gap-16">
-        <div className="flex min-w-0 flex-col gap-14">
-          <Block id="overview" title="Overview">
-            <div className="prose-measure space-y-4 text-lg text-graphite">
-              {c.overview.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
-          </Block>
-
-          <Block id="problem" title="The business problem">
-            <div className="prose-measure space-y-4 text-lg text-graphite">
-              {c.problem.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
-          </Block>
-
-          <Block id="contributions" title="What I built">
-            <ul className="prose-measure grid gap-4">
-              {c.contributions.map((item) => (
-                <li key={item} className="flex gap-3 text-[1.0625rem]">
-                  <span aria-hidden="true" className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                  <span>{item}</span>
+        <div className="fade-in mt-10 grid gap-10 border-t border-line pt-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-16" style={{ "--d": "300ms" } as React.CSSProperties}>
+          <p className="lede">{p.summary}</p>
+          <div className="flex flex-col gap-6 lg:items-end">
+            <ul className="flex flex-wrap gap-3 lg:justify-end">
+              {p.live && (
+                <li>
+                  <a href={p.live.href} {...external} className="btn btn-primary">
+                    {p.live.label}
+                    <ArrowUpRight className="arrow" />
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
+              )}
+              {p.links.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} {...external} className="btn btn-secondary">
+                    {l.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
                 </li>
               ))}
             </ul>
-          </Block>
+            <p className="text-sm text-ink-3 lg:text-right">{p.categories.join(", ")}</p>
+          </div>
+        </div>
+      </header>
 
-          <Block id="implementation" title="How it works">
-            <div className="grid gap-8 md:grid-cols-2">
-              {c.implementation.map((it) => (
-                <div key={it.heading}>
-                  <h3 className="text-lg">{it.heading}</h3>
-                  <p className="mt-2 text-graphite">{it.body}</p>
+      <div className="container-page fade-in mt-14 md:mt-20" style={{ "--d": "420ms" } as React.CSSProperties}>
+        <div className="media">
+          <Image
+            src={p.cover.src}
+            alt={p.cover.alt}
+            width={1440}
+            height={900}
+            priority
+            sizes="(min-width: 1320px) 1240px, 100vw"
+            className="aspect-[16/10] w-full object-cover object-top"
+          />
+        </div>
+      </div>
+
+      <div className="container-page mt-20 flex flex-col gap-16 pb-24 md:mt-28 md:gap-20 md:pb-32">
+        <Block id="overview" title="Project overview">
+          <div className="measure space-y-4 text-lg text-ink-2">
+            {p.overview.map((t) => (
+              <p key={t}>{t}</p>
+            ))}
+          </div>
+        </Block>
+
+        <Block id="problem" title="Problem and objective">
+          <div className="measure space-y-4 text-lg text-ink-2">
+            {p.problem.map((t) => (
+              <p key={t}>{t}</p>
+            ))}
+          </div>
+        </Block>
+
+        <Block id="contribution" title="My contribution">
+          <ul className="measure divide-y divide-line border-y border-line">
+            {p.contributions.map((item) => (
+              <li key={item} className="py-4 text-[1.0625rem]">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Block>
+
+        <Block id="implementation" title="Technical implementation">
+          <div className="grid gap-x-12 gap-y-10 md:grid-cols-2">
+            {p.implementation.map((it) => (
+              <div key={it.heading}>
+                <h3 className="text-xl font-semibold">{it.heading}</h3>
+                <p className="mt-3 text-ink-2">{it.body}</p>
+              </div>
+            ))}
+          </div>
+        </Block>
+
+        <Block id="technologies" title="Technologies used">
+          <ul className="flex flex-wrap gap-2" aria-label="Stack">
+            {p.stack.map((s) => (
+              <li key={s} className="tag text-[0.9rem] text-ink">
+                {s}
+              </li>
+            ))}
+          </ul>
+          {p.integrations.length > 0 && (
+            <dl className="mt-10 grid gap-x-12 gap-y-6 sm:grid-cols-2">
+              {p.integrations.map((i) => (
+                <div key={i.name} className="border-t border-line pt-4">
+                  <dt className="font-semibold">{i.name}</dt>
+                  <dd className="mt-1 text-ink-2">{i.use}</dd>
                 </div>
               ))}
-            </div>
-          </Block>
+            </dl>
+          )}
+        </Block>
 
-          {c.shots.length > 1 && (
-            <Block id="screens" title="Screens">
-              <div className="grid gap-8">
-                {c.shots.slice(1).map((s) => (
-                  <figure key={s.src}>
+        {gallery.length > 0 && (
+          <Block id="screens" title="Screenshots">
+            <div className="grid gap-10">
+              {gallery.map((s) => (
+                <figure key={s.src}>
+                  <div className="media">
                     <Image
                       src={s.src}
                       alt={s.alt}
                       width={1440}
                       height={900}
-                      sizes="(min-width: 1024px) 720px, 100vw"
-                      className="w-full rounded-[var(--radius)] border border-rule"
+                      sizes="(min-width: 1320px) 980px, 100vw"
+                      className="w-full"
                     />
-                    {s.caption && (
-                      <figcaption className="mt-2.5 text-sm text-graphite">{s.caption}</figcaption>
-                    )}
-                  </figure>
-                ))}
-              </div>
-            </Block>
-          )}
-
-          {c.notes && c.notes.length > 0 && (
-            <Block id="notes" title="Notes">
-              <ul className="prose-measure space-y-3 text-graphite">
-                {c.notes.map((n) => (
-                  <li key={n}>{n}</li>
-                ))}
-              </ul>
-            </Block>
-          )}
-        </div>
-
-        <aside className="lg:sticky lg:top-24 lg:self-start" aria-label="Project facts">
-          <div className="rounded-[var(--radius-lg)] border border-rule bg-panel p-6">
-            <h2 className="font-sans text-[0.95rem] font-semibold tracking-normal text-graphite">
-              Integrations
-            </h2>
-            <dl className="mt-3 space-y-3">
-              {c.integrations.map((i) => (
-                <div key={i.name}>
-                  <dt className="font-semibold">{i.name}</dt>
-                  <dd className="text-sm text-graphite">{i.use}</dd>
-                </div>
+                  </div>
+                  {s.caption && <figcaption className="mt-3 text-sm text-ink-3">{s.caption}</figcaption>}
+                </figure>
               ))}
-            </dl>
-            <h2 className="mt-7 font-sans text-[0.95rem] font-semibold tracking-normal text-graphite">
-              Stack
-            </h2>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {c.stack.map((s) => (
-                <li key={s} className="rounded-md border border-rule-strong bg-paper px-2.5 py-1 text-sm">
-                  {s}
-                </li>
+            </div>
+          </Block>
+        )}
+
+        {p.notes && p.notes.length > 0 && (
+          <Block id="notes" title="Notes">
+            <ul className="measure space-y-3 text-ink-2">
+              {p.notes.map((n) => (
+                <li key={n}>{n}</li>
               ))}
             </ul>
-          </div>
-        </aside>
+          </Block>
+        )}
       </div>
 
-      <nav aria-label="Next case study" className="border-t border-rule">
-        <Link
-          href={`/work/${next.slug}`}
-          className="container-page group flex flex-col gap-2 py-14 md:py-20"
-        >
-          <span className="text-[0.95rem] text-graphite">Next case study</span>
-          <span className="font-display text-[clamp(1.8rem,4vw,3rem)] font-semibold tracking-[-0.03em] group-hover:text-accent">
+      <nav aria-label="Next case study" className="border-t border-line">
+        <Link href={`/work/${next.slug}`} className="container-page group flex flex-col gap-3 py-16 md:py-24">
+          <span className="text-[0.95rem] text-ink-2">Next case study</span>
+          <span className="display flex items-center gap-4 text-[clamp(1.9rem,5vw,4rem)] transition-colors duration-300 group-hover:text-accent-hi">
             {next.title}
+            <ArrowRight size={36} className="hidden shrink-0 transition-transform duration-500 group-hover:translate-x-2 md:block" />
           </span>
         </Link>
       </nav>

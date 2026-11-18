@@ -10,15 +10,20 @@ export const siteUrl = configuredSiteUrl.replace(/\/+$/, "");
 
 export const profile = {
   name: "Everesto Cabasag",
-  role: "Full Stack Developer",
-  specialty: "AI Integration & Business Automation",
-  headline: "Full Stack Developer | AI Integration & Business Automation",
+  fullName: "Everesto Cabasag Jr.",
+  initials: "EC",
+  role: "Full-Stack Developer",
+  headline: "Full-Stack Developer, web applications, API integrations and AI automation",
   location: "Philippines",
+  timezone: "UTC+8",
   email: "devnetechn@gmail.com",
   github: "https://github.com/devnetechn",
   githubHandle: "devnetechn",
   portrait: "/projects/bares.png",
   resumePdf: "/everesto-cabasag-resume.pdf",
+  /** Shown in the navigation and contact section. Set to false to hide. */
+  available: true,
+  availability: "Available for freelance work",
   description:
-    "Everesto Cabasag is a full stack developer in the Philippines who builds business web applications, API integrations, and AI-assisted automation such as booking systems, lead pipelines, payments, and supplier integrations.",
+    "Everesto Cabasag is a full-stack developer in the Philippines who builds web applications, API integrations and AI-powered automation, from first idea to deployment.",
 };

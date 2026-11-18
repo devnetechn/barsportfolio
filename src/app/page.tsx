@@ -1,11 +1,10 @@
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
-import Services from "@/components/Services";
-import Skills from "@/components/Skills";
 import About from "@/components/About";
+import Expertise from "@/components/Expertise";
 import Contact from "@/components/Contact";
 import { profile, siteUrl } from "@/lib/site";
-import { caseStudies } from "@/data/projects";
+import { projects } from "@/data/projects";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -19,16 +18,18 @@ const jsonLd = {
   address: { "@type": "PostalAddress", addressCountry: "PH" },
   knowsAbout: [
     "Full-stack web development",
+    "Next.js",
+    "React",
+    "PHP",
     "API integration",
-    "AI-assisted business automation",
-    "Backend and database development",
-    "Lead generation systems",
+    "AI integration and automation",
+    "Database design",
   ],
   sameAs: [profile.github],
-  subjectOf: caseStudies.map((c) => ({
+  subjectOf: projects.map((p) => ({
     "@type": "CreativeWork",
-    name: c.title,
-    url: `${siteUrl}/work/${c.slug}`,
+    name: p.title,
+    url: `${siteUrl}/work/${p.slug}`,
   })),
 };
 
@@ -41,9 +42,8 @@ export default function Home() {
       />
       <Hero />
       <Projects />
-      <Services />
-      <Skills />
       <About />
+      <Expertise />
       <Contact />
     </>
   );
